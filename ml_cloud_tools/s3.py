@@ -38,10 +38,10 @@ def copy_s3_file_to_file(
     local_file_name: str,
     s3_bucket_name: Optional[str] = None,
     s3_kwargs: Optional[Dict[str, Any]] = None,
-):
+) -> None:
     """Copy a file from S3 to a file on the local file system.
 
-    Download the S3 file at ``s3_prefix`` from the S3 bucket ``S3_BUCKET_NAME``
+    Download the S3 file at ``s3_dir_name`` from the S3 bucket ``S3_BUCKET_NAME``
     to the local file ``local_file_name``.
 
     Args:
@@ -64,10 +64,10 @@ def copy_file_to_s3_file(
     s3_file_name: str,
     s3_bucket_name: Optional[str] = None,
     s3_kwargs: Optional[Dict[str, Any]] = None,
-):
+) -> None:
     """Copy a file on the local file system to a file on S3.
 
-    Upload a local file ``local_file_name`` to the S3 file at ``s3_prefix`` from the
+    Upload a local file ``local_file_name`` to the S3 file at ``s3_dir_name`` from the
     S3 bucket ``S3_BUCKET_NAME``.
 
     Args:
@@ -96,16 +96,51 @@ def copy_s3_dir_to_dir(
     Returns:
         Local directory where files are stored.
     """
+    local_dir_path = Path(local_dir_name)
+    if not local_dir_path.is_dir():
+        raise ValueError(f"'local_dir_name' must be a directory! It was: {local_dir_name}")
+
     s3_bucket = _get_s3_bucket(s3_bucket_name)
 
-    final_destination = Path(local_dir_name) / Path(s3_dir_name).name
+    final_local_dir_path = local_dir_path / Path(s3_dir_name).name
     for obj in s3_bucket.objects.filter(Prefix=s3_dir_name):
         if obj.key[-1] == "/":
-            _logger.debug("Skipping folder %s", obj.key)
+            _logger.debug("Skipping dir %s", obj.key)
             continue
-        local_path = final_destination / Path(obj.key).relative_to(s3_dir_name)
+        local_path = final_local_dir_path / Path(obj.key).relative_to(s3_dir_name)
         _logger.debug("Downloading %s to %s", obj.key, local_path.as_posix())
         local_path.parents[0].mkdir(exist_ok=True, parents=True)
         # see https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Bucket.download_file  # NOQA: E501
         s3_bucket.download_file(obj.key, local_path.as_posix(), **s3_kwargs)
-    return final_destination.as_posix()
+    return final_local_dir_path.as_posix()
+
+
+def copy_dir_to_s3_dir(
+    local_dir_name: str,
+    s3_dir_name: str,
+    s3_bucket_name: Optional[str] = None,
+    s3_kwargs: Optional[Dict[str, Any]] = None,
+) -> str:
+    """Copy a directory from the local file system to a directory on S3.
+
+    Returns:
+        S3 directory where files are stored.
+    """
+    local_dir_path = Path(local_dir_name)
+    if not local_dir_path.is_dir():
+        raise ValueError(f"'local_dir_name' must be a directory! It was: {local_dir_name}")
+    s3_bucket = _get_s3_bucket(s3_bucket_name)
+    final_s3_dir_path = Path(s3_dir_name) / local_dir_path.name
+    _logger.debug(
+        "Uploading dir %s to S3 dir %s", local_dir_path.as_posix(), final_s3_dir_path.as_posix()
+    )
+    for file_path in local_dir_path.iterdir():
+        if file_path.is_dir():
+            # s3 has no directories, just files with prefixes
+            _logger.debug("Skipping dir %s", file_path.as_posix())
+        else:
+            s3_file_path = final_s3_dir_path / file_path.relative_to(local_dir_path)
+            _logger.debug("Uploading %s to %s", file_path.as_posix(), s3_file_path.as_posix())
+            # see https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Bucket.upload_file  # NOQA: E501
+            s3_bucket.upload_file(file_path.as_posix(), s3_file_path.as_posix(), **s3_kwargs)
+    return final_s3_dir_path.as_posix()
