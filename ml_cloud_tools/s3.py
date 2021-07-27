@@ -8,6 +8,7 @@
 
 import logging
 import os
+from pathlib import Path
 from typing import Any, Dict, Optional
 
 import boto3
@@ -22,7 +23,7 @@ def _get_s3_bucket(s3_bucket_name: Optional[str] = None):
 
     if s3_bucket_name is None:
         raise ValueError(
-            "S3 bucket name must be set by parameter or "
+            "S3 bucket name must be set by parameter or the "
             "'DEFAULT_S3_BUCKET_NAME' environment variable!"
         )
 
@@ -32,21 +33,21 @@ def _get_s3_bucket(s3_bucket_name: Optional[str] = None):
     return bucket
 
 
-def download_s3_file(
-    s3_file_key: str,
-    local_file: str,
+def copy_s3_file_to_file(
+    s3_file_name: str,
+    local_file_name: str,
     s3_bucket_name: Optional[str] = None,
     s3_kwargs: Optional[Dict[str, Any]] = None,
 ):
-    """Download file from S3 to local file system.
+    """Copy a file from S3 to a file on the local file system.
 
-    Download file at ``s3_prefix`` from bucket S3_BUCKET_NAME
-    to local file path <destination>.
+    Download the S3 file at ``s3_prefix`` from the S3 bucket ``S3_BUCKET_NAME``
+    to the local file ``local_file_name``.
 
     Args:
-        s3_file_key: The name of the so called key to download from.
+        s3_file_name: The name of the so called key to download from.
             This is the part after the ``s3_bucket_name``. Example: ``/foo/bar/baz.txt``
-        local_file: The local path to the file to download to.
+        local_file_name: The local path to the file to download to.
             Example: ``/home/my_username/baz.txt``
         s3_bucket_name: The S3 bucket name. Can also be provided by the ``DEFAULT_S3_BUCKET_NAME``
             environment variable. One of the two must be specified.
@@ -55,4 +56,56 @@ def download_s3_file(
     s3_bucket = _get_s3_bucket(s3_bucket_name)
 
     # see https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Bucket.download_file  # NOQA: E501
-    s3_bucket.download_file(s3_file_key, local_file, **s3_kwargs)
+    s3_bucket.download_file(s3_file_name, local_file_name, **s3_kwargs)
+
+
+def copy_file_to_s3_file(
+    local_file_name: str,
+    s3_file_name: str,
+    s3_bucket_name: Optional[str] = None,
+    s3_kwargs: Optional[Dict[str, Any]] = None,
+):
+    """Copy a file on the local file system to a file on S3.
+
+    Upload a local file ``local_file_name`` to the S3 file at ``s3_prefix`` from the
+    S3 bucket ``S3_BUCKET_NAME``.
+
+    Args:
+        local_file_name: The local path to the file to upload.
+            Example: ``/home/my_username/baz.txt``
+        s3_file_name: The name of the so called key to upload to.
+            This is the part after the ``s3_bucket_name``. Example: ``/foo/bar/baz.txt``
+        s3_bucket_name: The S3 bucket name. Can also be provided by the ``DEFAULT_S3_BUCKET_NAME``
+            environment variable. One of the two must be specified.
+        s3_kwargs: Additional kwargs to be passed to the S3 client function.
+    """
+    s3_bucket = _get_s3_bucket(s3_bucket_name)
+
+    # see https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Bucket.upload_file  # NOQA: E501
+    s3_bucket.upload_file(local_file_name, s3_file_name, **s3_kwargs)
+
+
+def copy_s3_dir_to_dir(
+    s3_dir_name: str,
+    local_dir_name: str,
+    s3_bucket_name: Optional[str] = None,
+    s3_kwargs: Optional[Dict[str, Any]] = None,
+) -> str:
+    """Copy a directory from S3 to a directory on the local file system.
+
+    Returns:
+        Local directory where files are stored.
+    """
+    s3_bucket = _get_s3_bucket(s3_bucket_name)
+
+    final_destination = Path(local_dir_name) / Path(s3_dir_name).name
+    for obj in s3_bucket.objects.filter(Prefix=s3_dir_name):
+        if obj.key[-1] == "/":
+            _logger.debug("Skipping folder %s", obj.key)
+            continue
+        local_path = final_destination / Path(obj.key).relative_to(s3_dir_name)
+        _logger.debug("Downloading %s to %s", obj.key, local_path.as_posix())
+        local_path.parents[0].mkdir(exist_ok=True, parents=True)
+        # see https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Bucket.download_file  # NOQA: E501
+        s3_bucket.download_file(obj.key, local_path.as_posix(), **s3_kwargs)
+    return final_destination.as_posix()
