@@ -55,6 +55,8 @@ def copy_s3_file_to_file(
     """
     s3_bucket = _get_s3_bucket(s3_bucket_name)
 
+    _logger.debug("Copying S3 file %s to %s", s3_file_name, local_file_name)
+
     # see https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Bucket.download_file  # NOQA: E501
     s3_bucket.download_file(s3_file_name, local_file_name, **s3_kwargs)
 
@@ -81,6 +83,8 @@ def copy_file_to_s3_file(
     """
     s3_bucket = _get_s3_bucket(s3_bucket_name)
 
+    _logger.debug("Copying %s to S3 file %s", local_file_name, s3_file_name)
+
     # see https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Bucket.upload_file  # NOQA: E501
     s3_bucket.upload_file(local_file_name, s3_file_name, **s3_kwargs)
 
@@ -106,12 +110,12 @@ def copy_s3_dir_to_dir(
     for obj in s3_bucket.objects.filter(Prefix=s3_dir_name):
         if obj.key[-1] == "/":
             _logger.debug("Skipping dir %s", obj.key)
-            continue
-        local_path = final_local_dir_path / Path(obj.key).relative_to(s3_dir_name)
-        _logger.debug("Downloading %s to %s", obj.key, local_path.as_posix())
-        local_path.parents[0].mkdir(exist_ok=True, parents=True)
-        # see https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Bucket.download_file  # NOQA: E501
-        s3_bucket.download_file(obj.key, local_path.as_posix(), **s3_kwargs)
+        else:
+            local_path = final_local_dir_path / Path(obj.key).relative_to(s3_dir_name)
+            _logger.debug("Copying S3 %s to %s", obj.key, local_path.as_posix())
+            local_path.parents[0].mkdir(exist_ok=True, parents=True)
+            # see https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Bucket.download_file  # NOQA: E501
+            s3_bucket.download_file(obj.key, local_path.as_posix(), **s3_kwargs)
     return final_local_dir_path.as_posix()
 
 
@@ -140,7 +144,7 @@ def copy_dir_to_s3_dir(
             _logger.debug("Skipping dir %s", file_path.as_posix())
         else:
             s3_file_path = final_s3_dir_path / file_path.relative_to(local_dir_path)
-            _logger.debug("Uploading %s to %s", file_path.as_posix(), s3_file_path.as_posix())
+            _logger.debug("Copying %s to S3 %s", file_path.as_posix(), s3_file_path.as_posix())
             # see https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Bucket.upload_file  # NOQA: E501
             s3_bucket.upload_file(file_path.as_posix(), s3_file_path.as_posix(), **s3_kwargs)
     return final_s3_dir_path.as_posix()
