@@ -141,7 +141,7 @@ def copy_dir_to_s3_dir(
     _logger.debug(
         "Uploading dir %s to S3 dir %s", local_dir_path.as_posix(), final_s3_dir_path.as_posix()
     )
-    for file_path in local_dir_path.iterdir():
+    for file_path in local_dir_path.glob("**/*"):
         if file_path.is_dir():
             # s3 has no directories, just files with prefixes
             _logger.debug("Skipping dir %s", file_path.as_posix())
