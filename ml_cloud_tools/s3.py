@@ -53,6 +53,7 @@ def copy_s3_file_to_file(
         overwrite: Overwrite local file.
         s3_kwargs: Additional kwargs to be passed to the S3 client function.
     """
+    s3_kwargs = {} if s3_kwargs is None else s3_kwargs
     if (not overwrite) and Path(local_file_name).is_file():
         _logger.debug("File %s is already available. Skipping it.", local_file_name)
     else:
@@ -82,6 +83,7 @@ def copy_file_to_s3_file(
             environment variable. One of the two must be specified.
         s3_kwargs: Additional kwargs to be passed to the S3 client function.
     """
+    s3_kwargs = {} if s3_kwargs is None else s3_kwargs
     _logger.debug("Copying %s to S3 file %s", local_file_name, s3_file_name)
     s3_bucket = _get_s3_bucket(s3_bucket_name)
     # see https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Bucket.upload_file  # NOQA: E501
@@ -100,6 +102,7 @@ def copy_s3_dir_to_dir(
     Returns:
         Local directory where files are stored.
     """
+    s3_kwargs = {} if s3_kwargs is None else s3_kwargs
     local_dir_path = Path(local_dir_name)
     if not local_dir_path.is_dir():
         raise ValueError(f"'local_dir_name' must be a directory! It was: {local_dir_name}")
@@ -132,6 +135,7 @@ def copy_dir_to_s3_dir(
     Returns:
         S3 directory where files are stored.
     """
+    s3_kwargs = {} if s3_kwargs is None else s3_kwargs
     local_dir_path = Path(local_dir_name)
     if not local_dir_path.is_dir():
         raise ValueError(f"'local_dir_name' must be a directory! It was: {local_dir_name}")
