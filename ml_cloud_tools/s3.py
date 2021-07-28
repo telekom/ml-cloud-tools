@@ -9,7 +9,7 @@
 import logging
 import os
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 import boto3
 
@@ -17,7 +17,7 @@ import boto3
 _logger = logging.getLogger(__name__)
 
 
-def _get_s3_bucket(s3_bucket_name: Optional[str] = None):
+def _get_s3_bucket_name(s3_bucket_name) -> str:
     if s3_bucket_name is None:
         s3_bucket_name = os.getenv("DEFAULT_S3_BUCKET_NAME")
     if s3_bucket_name is None:
@@ -25,8 +25,14 @@ def _get_s3_bucket(s3_bucket_name: Optional[str] = None):
             "S3 bucket name must be set by parameter or the "
             "'DEFAULT_S3_BUCKET_NAME' environment variable!"
         )
-    # see https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#bucket
+    return s3_bucket_name
+
+
+def _get_s3_bucket(s3_bucket_name: Optional[str] = None):
+    s3_bucket_name = _get_s3_bucket_name(s3_bucket_name)
+    # see https://boto3.amazonaws.com/v1/documentation/api/latest/reference/core/boto3.html?highlight=resource#boto3.resource  # NOQA: E501
     s3_resource = boto3.resource("s3")
+    # see https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#bucket
     bucket = s3_resource.Bucket(s3_bucket_name)
     return bucket
 
@@ -155,3 +161,31 @@ def copy_dir_to_s3_dir(
             # see https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Bucket.upload_file  # NOQA: E501
             s3_bucket.upload_file(file_path.as_posix(), s3_file_path.as_posix(), **s3_kwargs)
     return final_s3_dir_path.as_posix()
+
+
+def list_s3_files(
+    s3_dir_name: str,
+    max_files: int = 100,
+    s3_bucket_name: Optional[str] = None,
+) -> List[str]:
+    """List files in S3 directory."""
+    s3_bucket_name = _get_s3_bucket_name(s3_bucket_name)
+    s3_client = boto3.client("s3")
+    response = s3_client.list_objects_v2(
+        Bucket=s3_bucket_name, Prefix=s3_dir_name, MaxKeys=max_files
+    )
+    if response["KeyCount"] == 0:
+        _logger.warning("S3 s3_dir_name %s empty", s3_dir_name)
+        return []
+    files = [key_dict["Key"] for key_dict in response["Contents"]]
+    while response["IsTruncated"]:
+        _logger.debug("Got continuation token, re-listing")
+        continuation_token = response["NextContinuationToken"]
+        response = s3_client.list_objects_v2(
+            Bucket=s3_bucket_name,
+            Prefix=s3_dir_name,
+            MaxKeys=max_files,
+            ContinuationToken=continuation_token,
+        )
+        files.extend(key_dict["Key"] for key_dict in response["Contents"])
+    return files
