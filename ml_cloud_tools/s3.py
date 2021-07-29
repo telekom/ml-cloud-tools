@@ -165,15 +165,14 @@ def copy_dir_to_s3_dir(
 
 def list_s3_files(
     s3_dir_name: str,
-    max_files: int = 100,
     s3_bucket_name: Optional[str] = None,
+    s3_kwargs: Optional[Dict[str, Any]] = None,
 ) -> List[str]:
     """List files in S3 directory."""
+    s3_kwargs = {} if s3_kwargs is None else s3_kwargs
     s3_bucket_name = _get_s3_bucket_name(s3_bucket_name)
     s3_client = boto3.client("s3")
-    response = s3_client.list_objects_v2(
-        Bucket=s3_bucket_name, Prefix=s3_dir_name, MaxKeys=max_files
-    )
+    response = s3_client.list_objects_v2(Bucket=s3_bucket_name, Prefix=s3_dir_name, **s3_kwargs)
     if response["KeyCount"] == 0:
         _logger.warning("S3 s3_dir_name %s empty", s3_dir_name)
         return []
@@ -184,8 +183,8 @@ def list_s3_files(
         response = s3_client.list_objects_v2(
             Bucket=s3_bucket_name,
             Prefix=s3_dir_name,
-            MaxKeys=max_files,
             ContinuationToken=continuation_token,
+            **s3_kwargs,
         )
         files.extend(key_dict["Key"] for key_dict in response["Contents"])
     return files
