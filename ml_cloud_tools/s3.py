@@ -25,6 +25,7 @@ def _get_s3_bucket_name(s3_bucket_name) -> str:
             "S3 bucket name must be set by parameter or the "
             "'DEFAULT_S3_BUCKET_NAME' environment variable!"
         )
+    _logger.debug("Using s3_bucket_name: %s", s3_bucket_name)
     return s3_bucket_name
 
 
@@ -116,7 +117,7 @@ def copy_s3_dir_to_dir(
     s3_bucket = _get_s3_bucket(s3_bucket_name)
     final_local_dir_path = local_dir_path / Path(s3_dir_name).name
     for obj in s3_bucket.objects.filter(Prefix=s3_dir_name):
-        if obj.key[-1] == "/":
+        if obj.key[-1] == "/":  # TODO: this might not be needed
             _logger.debug("Skipping dir %s", obj.key)
         else:
             local_path = final_local_dir_path / Path(obj.key).relative_to(s3_dir_name)
@@ -174,7 +175,7 @@ def list_s3_files(
     s3_client = boto3.client("s3")
     response = s3_client.list_objects_v2(Bucket=s3_bucket_name, Prefix=s3_dir_name, **s3_kwargs)
     if response["KeyCount"] == 0:
-        _logger.warning("S3 s3_dir_name %s empty", s3_dir_name)
+        _logger.warning("S3 directory is empty. s3_dir_name: %s", s3_dir_name)
         return []
     files = [key_dict["Key"] for key_dict in response["Contents"]]
     while response["IsTruncated"]:
