@@ -68,10 +68,8 @@ def test_copy_s3_dir_to_dir(tmpdir):
     bucket_name = "moto_mock_bucket"
     file_name = "s3_test_file.txt"
     s3_root_dir = (Path("test_dir") / Path("a")).as_posix()
-    s3_dir_a_x = (Path(s3_root_dir) / Path("x")).as_posix()
-    s3_dir_a_y = (Path(s3_root_dir) / Path("y")).as_posix()
-    full_s3_file_name_a_x = (Path(s3_dir_a_x) / Path(file_name)).as_posix()
-    full_s3_file_name_a_y = (Path(s3_dir_a_y) / Path(file_name)).as_posix()
+    full_s3_file_name_a_x = (Path(s3_root_dir) / Path("x") / Path(file_name)).as_posix()
+    full_s3_file_name_a_y = (Path(s3_root_dir) / Path("y") / Path(file_name)).as_posix()
     file_content = "This is a s3 test file."
 
     # create mock bucket and s3 file
