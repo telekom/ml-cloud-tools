@@ -9,6 +9,7 @@ import boto3
 from moto import mock_s3
 
 from ml_cloud_tools import (
+    copy_dir_to_s3_dir,
     copy_file_to_s3_file,
     copy_s3_dir_to_dir,
     copy_s3_file_to_file,
@@ -100,6 +101,51 @@ def test_copy_s3_dir_to_dir(tmpdir):
     ) as f:
         locale_content = f.read()
     assert locale_content == file_content
+
+
+@mock_s3
+def test_copy_dir_to_s3_dir(tmpdir):
+    bucket_name = "moto_mock_bucket"
+    file_name = "s3_test_file.txt"
+    s3_file_dir = "test_dir"
+    root_dir = (Path(tmpdir) / Path("a")).as_posix()
+    full_file_name_a_x = (Path(root_dir) / Path("x") / Path(file_name)).as_posix()
+    full_file_name_a_y = (Path(root_dir) / Path("y") / Path(file_name)).as_posix()
+    file_content = "This is a s3 test file."
+
+    # create mock bucket and s3 file
+    s3_resource = boto3.resource("s3")
+    s3_resource.create_bucket(Bucket=bucket_name)
+
+    # create locale files
+    os.makedirs(os.path.dirname(full_file_name_a_x))
+    os.makedirs(os.path.dirname(full_file_name_a_y))
+    with open(full_file_name_a_x, "w", encoding="utf-8") as f:
+        f.write(file_content)
+    with open(full_file_name_a_y, "w", encoding="utf-8") as f:
+        f.write(file_content)
+
+    copy_dir_to_s3_dir(root_dir, s3_file_dir, bucket_name)
+
+    body_a_x = (
+        s3_resource.Object(
+            bucket_name, (Path(s3_file_dir) / Path("a") / Path("x") / Path(file_name)).as_posix()
+        )
+        .get()["Body"]
+        .read()
+        .decode("utf-8")
+    )
+    body_a_y = (
+        s3_resource.Object(
+            bucket_name, (Path(s3_file_dir) / Path("a") / Path("y") / Path(file_name)).as_posix()
+        )
+        .get()["Body"]
+        .read()
+        .decode("utf-8")
+    )
+
+    assert body_a_x == file_content
+    assert body_a_y == file_content
 
 
 @mock_s3
