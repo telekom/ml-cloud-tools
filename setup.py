@@ -26,7 +26,7 @@ extras_require = {
     ],
     "optional": [],
     "testing": ["pytest", "moto", "packaging"],
-    # "doc": ["sphinx", "sphinx_rtd_theme", "myst_parser", "sphinx_copybutton"],
+    "doc": ["sphinx", "sphinx_rtd_theme", "myst_parser", "sphinx_copybutton"],
 }
 
 
