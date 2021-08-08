@@ -215,12 +215,13 @@
 <span class="sd">    to the local file ``local_file_name``.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        s3_file_name: The name of the so called key to download from.</span>
+<span class="sd">        s3_file_name: Name of the so called key to download from.</span>
 <span class="sd">            This is the part after the ``s3_bucket_name``. Example: ``/foo/bar/baz.txt``</span>
-<span class="sd">        local_file_name: The local path to the file to download to.</span>
+<span class="sd">        local_file_name: Local path to the file to download to.</span>
 <span class="sd">            Example: ``/home/my_username/baz.txt``</span>
-<span class="sd">        s3_bucket_name: The S3 bucket name. Can also be provided by the ``DEFAULT_S3_BUCKET_NAME``</span>
-<span class="sd">            environment variable. One of the two must be specified.</span>
+<span class="sd">        s3_bucket_name: S3 bucket name. Can also be provided by the ``DEFAULT_S3_BUCKET_NAME``</span>
+<span class="sd">            environment variable. One of the two must be specified. If both are specified this</span>
+<span class="sd">            argument has priority.</span>
 <span class="sd">        overwrite: Overwrite local file.</span>
 <span class="sd">        s3_kwargs: Additional kwargs to be passed to the S3 client function.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -246,12 +247,13 @@
 <span class="sd">    S3 bucket ``S3_BUCKET_NAME``.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        local_file_name: The local path to the file to upload.</span>
+<span class="sd">        local_file_name: Local path to the file to upload.</span>
 <span class="sd">            Example: ``/home/my_username/baz.txt``</span>
-<span class="sd">        s3_file_name: The name of the so called key to upload to.</span>
+<span class="sd">        s3_file_name: Name of the so called key to upload to.</span>
 <span class="sd">            This is the part after the ``s3_bucket_name``. Example: ``/foo/bar/baz.txt``</span>
-<span class="sd">        s3_bucket_name: The S3 bucket name. Can also be provided by the ``DEFAULT_S3_BUCKET_NAME``</span>
-<span class="sd">            environment variable. One of the two must be specified.</span>
+<span class="sd">        s3_bucket_name: S3 bucket name. Can also be provided by the ``DEFAULT_S3_BUCKET_NAME``</span>
+<span class="sd">            environment variable. One of the two must be specified. If both are specified this</span>
+<span class="sd">            argument has priority.</span>
 <span class="sd">        s3_kwargs: Additional kwargs to be passed to the S3 client function.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">s3_kwargs</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="n">s3_kwargs</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">s3_kwargs</span>
@@ -270,8 +272,22 @@
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Copy a directory from S3 to a directory on the local file system.</span>
 
+<span class="sd">    If you call this function with ``s3_dir_name = &quot;a/x&quot;`` and ``local_dir_name = &quot;y&quot;``</span>
+<span class="sd">    it will create a local directory ``y/x`` and copy the S3 content in ``a/x`` to that location.</span>
+<span class="sd">    This way a S3 file at ``a/x/file.txt`` would be copied to ``y/x/file.txt``.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        s3_dir_name: Name of the S3 directory.</span>
+<span class="sd">        local_dir_name: Name of the local directory.</span>
+<span class="sd">        s3_bucket_name: S3 bucket name. Can also be provided by the ``DEFAULT_S3_BUCKET_NAME``</span>
+<span class="sd">            environment variable. One of the two must be specified. If both are specified this</span>
+<span class="sd">            argument has priority.</span>
+<span class="sd">        overwrite: Overwrite already existing files.</span>
+<span class="sd">        s3_kwargs: Additional kwargs to be passed to the S3 client function.</span>
+
 <span class="sd">    Returns:</span>
 <span class="sd">        Local directory where files are stored.</span>
+<span class="sd">        In the example above, this would be ``y/x``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">s3_kwargs</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="n">s3_kwargs</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">s3_kwargs</span>
     <span class="n">local_dir_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">local_dir_name</span><span class="p">)</span>
@@ -302,6 +318,14 @@
     <span class="n">s3_kwargs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Copy a directory from the local file system to a directory on S3.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        local_dir_name: Name of the local directory.</span>
+<span class="sd">        s3_dir_name: Name of the S3 directory.</span>
+<span class="sd">        s3_bucket_name: S3 bucket name. Can also be provided by the ``DEFAULT_S3_BUCKET_NAME``</span>
+<span class="sd">            environment variable. One of the two must be specified. If both are specified this</span>
+<span class="sd">            argument has priority.</span>
+<span class="sd">        s3_kwargs: Additional kwargs to be passed to the S3 client function.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        S3 directory where files are stored.</span>

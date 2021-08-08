@@ -181,16 +181,18 @@
 <span class="sig-prename descclassname"><span class="pre">ml_cloud_tools.s3.</span></span><span class="sig-name descname"><span class="pre">copy_dir_to_s3_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">local_dir_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3_dir_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3_bucket_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ml_cloud_tools/s3.html#copy_dir_to_s3_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ml_cloud_tools.s3.copy_dir_to_s3_dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy a directory from the local file system to a directory on S3.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>S3 directory where files are stored.</p>
-</dd>
-<dt class="field-even">Parameters</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>local_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – </p></li>
-<li><p><strong>s3_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – </p></li>
-<li><p><strong>s3_bucket_name</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – </p></li>
-<li><p><strong>s3_kwargs</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>Any</em><em>]</em><em>]</em>) – </p></li>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>local_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the local directory.</p></li>
+<li><p><strong>s3_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the S3 directory.</p></li>
+<li><p><strong>s3_bucket_name</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – S3 bucket name. Can also be provided by the <code class="docutils literal notranslate"><span class="pre">DEFAULT_S3_BUCKET_NAME</span></code>
+environment variable. One of the two must be specified. If both are specified this
+argument has priority.</p></li>
+<li><p><strong>s3_kwargs</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>Any</em><em>]</em><em>]</em>) – Additional kwargs to be passed to the S3 client function.</p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>S3 directory where files are stored.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
@@ -207,12 +209,13 @@ S3 bucket <code class="docutils literal notranslate"><span class="pre">S3_BUCKET
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>local_file_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The local path to the file to upload.
+<li><p><strong>local_file_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Local path to the file to upload.
 Example: <code class="docutils literal notranslate"><span class="pre">/home/my_username/baz.txt</span></code></p></li>
-<li><p><strong>s3_file_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The name of the so called key to upload to.
+<li><p><strong>s3_file_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the so called key to upload to.
 This is the part after the <code class="docutils literal notranslate"><span class="pre">s3_bucket_name</span></code>. Example: <code class="docutils literal notranslate"><span class="pre">/foo/bar/baz.txt</span></code></p></li>
-<li><p><strong>s3_bucket_name</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – The S3 bucket name. Can also be provided by the <code class="docutils literal notranslate"><span class="pre">DEFAULT_S3_BUCKET_NAME</span></code>
-environment variable. One of the two must be specified.</p></li>
+<li><p><strong>s3_bucket_name</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – S3 bucket name. Can also be provided by the <code class="docutils literal notranslate"><span class="pre">DEFAULT_S3_BUCKET_NAME</span></code>
+environment variable. One of the two must be specified. If both are specified this
+argument has priority.</p></li>
 <li><p><strong>s3_kwargs</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>Any</em><em>]</em><em>]</em>) – Additional kwargs to be passed to the S3 client function.</p></li>
 </ul>
 </dd>
@@ -226,18 +229,24 @@ environment variable. One of the two must be specified.</p></li>
 <dt class="sig sig-object py" id="ml_cloud_tools.s3.copy_s3_dir_to_dir">
 <span class="sig-prename descclassname"><span class="pre">ml_cloud_tools.s3.</span></span><span class="sig-name descname"><span class="pre">copy_s3_dir_to_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s3_dir_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_dir_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3_bucket_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ml_cloud_tools/s3.html#copy_s3_dir_to_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ml_cloud_tools.s3.copy_s3_dir_to_dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy a directory from S3 to a directory on the local file system.</p>
+<p>If you call this function with <code class="docutils literal notranslate"><span class="pre">s3_dir_name</span> <span class="pre">=</span> <span class="pre">&quot;a/x&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">local_dir_name</span> <span class="pre">=</span> <span class="pre">&quot;y&quot;</span></code>
+it will create a local directory <code class="docutils literal notranslate"><span class="pre">y/x</span></code> and copy the S3 content in <code class="docutils literal notranslate"><span class="pre">a/x</span></code> to that location.
+This way a S3 file at <code class="docutils literal notranslate"><span class="pre">a/x/file.txt</span></code> would be copied to <code class="docutils literal notranslate"><span class="pre">y/x/file.txt</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Local directory where files are stored.</p>
-</dd>
-<dt class="field-even">Parameters</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>s3_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – </p></li>
-<li><p><strong>local_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – </p></li>
-<li><p><strong>s3_bucket_name</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – </p></li>
-<li><p><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – </p></li>
-<li><p><strong>s3_kwargs</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>Any</em><em>]</em><em>]</em>) – </p></li>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s3_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the S3 directory.</p></li>
+<li><p><strong>local_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the local directory.</p></li>
+<li><p><strong>s3_bucket_name</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – S3 bucket name. Can also be provided by the <code class="docutils literal notranslate"><span class="pre">DEFAULT_S3_BUCKET_NAME</span></code>
+environment variable. One of the two must be specified. If both are specified this
+argument has priority.</p></li>
+<li><p><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Overwrite already existing files.</p></li>
+<li><p><strong>s3_kwargs</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>Any</em><em>]</em><em>]</em>) – Additional kwargs to be passed to the S3 client function.</p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Local directory where files are stored.
+In the example above, this would be <code class="docutils literal notranslate"><span class="pre">y/x</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
@@ -254,12 +263,13 @@ to the local file <code class="docutils literal notranslate"><span class="pre">l
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>s3_file_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The name of the so called key to download from.
+<li><p><strong>s3_file_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the so called key to download from.
 This is the part after the <code class="docutils literal notranslate"><span class="pre">s3_bucket_name</span></code>. Example: <code class="docutils literal notranslate"><span class="pre">/foo/bar/baz.txt</span></code></p></li>
-<li><p><strong>local_file_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The local path to the file to download to.
+<li><p><strong>local_file_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Local path to the file to download to.
 Example: <code class="docutils literal notranslate"><span class="pre">/home/my_username/baz.txt</span></code></p></li>
-<li><p><strong>s3_bucket_name</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – The S3 bucket name. Can also be provided by the <code class="docutils literal notranslate"><span class="pre">DEFAULT_S3_BUCKET_NAME</span></code>
-environment variable. One of the two must be specified.</p></li>
+<li><p><strong>s3_bucket_name</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – S3 bucket name. Can also be provided by the <code class="docutils literal notranslate"><span class="pre">DEFAULT_S3_BUCKET_NAME</span></code>
+environment variable. One of the two must be specified. If both are specified this
+argument has priority.</p></li>
 <li><p><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Overwrite local file.</p></li>
 <li><p><strong>s3_kwargs</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>Any</em><em>]</em><em>]</em>) – Additional kwargs to be passed to the S3 client function.</p></li>
 </ul>
