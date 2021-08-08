@@ -82,22 +82,23 @@ def test_copy_s3_dir_to_dir(tmpdir):
     s3_client.put_object(Bucket=bucket_name, Key=full_s3_file_name_a_x, Body=file_content)
     s3_client.put_object(Bucket=bucket_name, Key=full_s3_file_name_a_y, Body=file_content)
 
-    copy_s3_dir_to_dir(s3_root_dir, tmpdir, bucket_name)
+    local_dir = copy_s3_dir_to_dir(s3_root_dir, tmpdir, bucket_name)
 
-    assert (Path(tmpdir) / Path("a")).exists()
-    assert (Path(tmpdir) / Path("a") / Path("x")).exists()
-    assert (Path(tmpdir) / Path("a") / Path("y")).exists()
-    assert (Path(tmpdir) / Path("a") / Path("x") / Path(file_name)).exists()
-    assert (Path(tmpdir) / Path("a") / Path("y") / Path(file_name)).exists()
+    assert Path(local_dir).as_posix() == (Path(tmpdir) / Path("a")).as_posix()
+    assert Path(local_dir).exists()
+    assert (Path(local_dir) / Path("x")).exists()
+    assert (Path(local_dir) / Path("y")).exists()
+    assert (Path(local_dir) / Path("x") / Path(file_name)).exists()
+    assert (Path(local_dir) / Path("y") / Path(file_name)).exists()
 
     with open(
-        (Path(tmpdir) / Path("a") / Path("x") / Path(file_name)).as_posix(), "r", encoding="utf-8"
+        (Path(local_dir) / Path("x") / Path(file_name)).as_posix(), "r", encoding="utf-8"
     ) as f:
         locale_content = f.read()
     assert locale_content == file_content
 
     with open(
-        (Path(tmpdir) / Path("a") / Path("y") / Path(file_name)).as_posix(), "r", encoding="utf-8"
+        (Path(local_dir) / Path("y") / Path(file_name)).as_posix(), "r", encoding="utf-8"
     ) as f:
         locale_content = f.read()
     assert locale_content == file_content
@@ -125,20 +126,18 @@ def test_copy_dir_to_s3_dir(tmpdir):
     with open(full_file_name_a_y, "w", encoding="utf-8") as f:
         f.write(file_content)
 
-    copy_dir_to_s3_dir(root_dir, s3_file_dir, bucket_name)
+    s3_dir = copy_dir_to_s3_dir(root_dir, s3_file_dir, bucket_name)
+
+    assert s3_dir == (Path(s3_file_dir) / Path("a")).as_posix()
 
     body_a_x = (
-        s3_resource.Object(
-            bucket_name, (Path(s3_file_dir) / Path("a") / Path("x") / Path(file_name)).as_posix()
-        )
+        s3_resource.Object(bucket_name, (Path(s3_dir) / Path("x") / Path(file_name)).as_posix())
         .get()["Body"]
         .read()
         .decode("utf-8")
     )
     body_a_y = (
-        s3_resource.Object(
-            bucket_name, (Path(s3_file_dir) / Path("a") / Path("y") / Path(file_name)).as_posix()
-        )
+        s3_resource.Object(bucket_name, (Path(s3_dir) / Path("y") / Path(file_name)).as_posix())
         .get()["Body"]
         .read()
         .decode("utf-8")
