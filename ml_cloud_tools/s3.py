@@ -50,12 +50,13 @@ def copy_s3_file_to_file(
     to the local file ``local_file_name``.
 
     Args:
-        s3_file_name: The name of the so called key to download from.
+        s3_file_name: Name of the so called key to download from.
             This is the part after the ``s3_bucket_name``. Example: ``/foo/bar/baz.txt``
-        local_file_name: The local path to the file to download to.
+        local_file_name: Local path to the file to download to.
             Example: ``/home/my_username/baz.txt``
-        s3_bucket_name: The S3 bucket name. Can also be provided by the ``DEFAULT_S3_BUCKET_NAME``
-            environment variable. One of the two must be specified.
+        s3_bucket_name: S3 bucket name. Can also be provided by the ``DEFAULT_S3_BUCKET_NAME``
+            environment variable. One of the two must be specified. If both are specified this
+            argument has priority.
         overwrite: Overwrite local file.
         s3_kwargs: Additional kwargs to be passed to the S3 client function.
     """
@@ -81,12 +82,13 @@ def copy_file_to_s3_file(
     S3 bucket ``S3_BUCKET_NAME``.
 
     Args:
-        local_file_name: The local path to the file to upload.
+        local_file_name: Local path to the file to upload.
             Example: ``/home/my_username/baz.txt``
-        s3_file_name: The name of the so called key to upload to.
+        s3_file_name: Name of the so called key to upload to.
             This is the part after the ``s3_bucket_name``. Example: ``/foo/bar/baz.txt``
-        s3_bucket_name: The S3 bucket name. Can also be provided by the ``DEFAULT_S3_BUCKET_NAME``
-            environment variable. One of the two must be specified.
+        s3_bucket_name: S3 bucket name. Can also be provided by the ``DEFAULT_S3_BUCKET_NAME``
+            environment variable. One of the two must be specified. If both are specified this
+            argument has priority.
         s3_kwargs: Additional kwargs to be passed to the S3 client function.
     """
     s3_kwargs = {} if s3_kwargs is None else s3_kwargs
@@ -105,8 +107,22 @@ def copy_s3_dir_to_dir(
 ) -> str:
     """Copy a directory from S3 to a directory on the local file system.
 
+    If you call this function with ``s3_dir_name = "a/x"`` and ``local_dir_name = "y"``
+    it will create a local directory ``y/x`` and copy the S3 content in ``a/x`` to that location.
+    This way a S3 file at ``a/x/file.txt`` would be copied to ``y/x/file.txt``.
+
+    Args:
+        s3_dir_name: Name of the S3 directory.
+        local_dir_name: Name of the local directory.
+        s3_bucket_name: S3 bucket name. Can also be provided by the ``DEFAULT_S3_BUCKET_NAME``
+            environment variable. One of the two must be specified. If both are specified this
+            argument has priority.
+        overwrite: Overwrite already existing files.
+        s3_kwargs: Additional kwargs to be passed to the S3 client function.
+
     Returns:
         Local directory where files are stored.
+        In the example above, this would be ``y/x``.
     """
     s3_kwargs = {} if s3_kwargs is None else s3_kwargs
     local_dir_path = Path(local_dir_name)
@@ -137,6 +153,14 @@ def copy_dir_to_s3_dir(
     s3_kwargs: Optional[Dict[str, Any]] = None,
 ) -> str:
     """Copy a directory from the local file system to a directory on S3.
+
+    Args:
+        local_dir_name: Name of the local directory.
+        s3_dir_name: Name of the S3 directory.
+        s3_bucket_name: S3 bucket name. Can also be provided by the ``DEFAULT_S3_BUCKET_NAME``
+            environment variable. One of the two must be specified. If both are specified this
+            argument has priority.
+        s3_kwargs: Additional kwargs to be passed to the S3 client function.
 
     Returns:
         S3 directory where files are stored.
