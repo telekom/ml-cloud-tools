@@ -25,7 +25,7 @@ extras_require = {
         "pylintfileheader",
     ],
     "optional": [],
-    "testing": ["pytest"],
+    "testing": ["pytest", "moto"],
     # "doc": ["sphinx", "sphinx_rtd_theme", "myst_parser", "sphinx_copybutton"],
 }
 
