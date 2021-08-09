@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 
 import boto3
+import pytest
 from moto import mock_s3
 
 from ml_cloud_tools import (
@@ -15,6 +16,34 @@ from ml_cloud_tools import (
     copy_s3_file_to_file,
     list_s3_files,
 )
+from ml_cloud_tools.s3 import _get_s3_bucket_name
+
+
+def test_get_s3_bucket_name__from_arg():
+    bucket_name = "xyz"
+    result_bucket_name = _get_s3_bucket_name(bucket_name)
+    assert result_bucket_name == bucket_name
+
+
+def test_get_s3_bucket_name__from_both():
+    bucket_name = "xyz"
+    env_bucket_name = "abc"
+    os.environ["DEFAULT_S3_BUCKET_NAME"] = env_bucket_name
+    result_bucket_name = _get_s3_bucket_name(bucket_name)
+    assert result_bucket_name == bucket_name
+
+
+def test_get_s3_bucket_name__from_env():
+    env_bucket_name = "abc"
+    os.environ["DEFAULT_S3_BUCKET_NAME"] = env_bucket_name
+    result_bucket_name = _get_s3_bucket_name(None)
+    assert result_bucket_name == env_bucket_name
+
+
+def test_get_s3_bucket_name__from_none():
+    del os.environ["DEFAULT_S3_BUCKET_NAME"]
+    with pytest.raises(ValueError):
+        _ = _get_s3_bucket_name(None)
 
 
 @mock_s3
