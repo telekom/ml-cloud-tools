@@ -211,7 +211,7 @@
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Copy a file from S3 to a file on the local file system.</span>
 
-<span class="sd">    Download the S3 file at ``s3_dir_name`` from the S3 bucket ``S3_BUCKET_NAME``</span>
+<span class="sd">    Download the S3 file at ``s3_dir_name`` from the S3 bucket ``s3_bucket_name``</span>
 <span class="sd">    to the local file ``local_file_name``.</span>
 
 <span class="sd">    Args:</span>
@@ -223,7 +223,8 @@
 <span class="sd">            environment variable. One of the two must be specified. If both are specified this</span>
 <span class="sd">            argument has priority.</span>
 <span class="sd">        overwrite: Overwrite local file.</span>
-<span class="sd">        s3_kwargs: Additional kwargs to be passed to the S3 client function.</span>
+<span class="sd">        s3_kwargs: Additional kwargs to be passed to the S3 client function</span>
+<span class="sd">            :meth:`S3.Bucket.download_file`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">s3_kwargs</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="n">s3_kwargs</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">s3_kwargs</span>
     <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">overwrite</span><span class="p">)</span> <span class="ow">and</span> <span class="n">Path</span><span class="p">(</span><span class="n">local_file_name</span><span class="p">)</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
@@ -244,7 +245,7 @@
     <span class="sd">&quot;&quot;&quot;Copy a file on the local file system to a file on S3.</span>
 
 <span class="sd">    Upload a local file ``local_file_name`` to the S3 file at ``s3_dir_name`` from the</span>
-<span class="sd">    S3 bucket ``S3_BUCKET_NAME``.</span>
+<span class="sd">    S3 bucket ``s3_bucket_name``.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        local_file_name: Local path to the file to upload.</span>
@@ -254,7 +255,8 @@
 <span class="sd">        s3_bucket_name: S3 bucket name. Can also be provided by the ``DEFAULT_S3_BUCKET_NAME``</span>
 <span class="sd">            environment variable. One of the two must be specified. If both are specified this</span>
 <span class="sd">            argument has priority.</span>
-<span class="sd">        s3_kwargs: Additional kwargs to be passed to the S3 client function.</span>
+<span class="sd">        s3_kwargs: Additional kwargs to be passed to the S3 client function</span>
+<span class="sd">            :meth:`S3.Bucket.upload_file`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">s3_kwargs</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="n">s3_kwargs</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">s3_kwargs</span>
     <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Copying </span><span class="si">%s</span><span class="s2"> to S3 file </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">local_file_name</span><span class="p">,</span> <span class="n">s3_file_name</span><span class="p">)</span>
@@ -278,12 +280,14 @@
 
 <span class="sd">    Args:</span>
 <span class="sd">        s3_dir_name: Name of the S3 directory.</span>
+<span class="sd">            This is the part after the ``s3_bucket_name``. Example: ``/foo/bar``</span>
 <span class="sd">        local_dir_name: Name of the local directory.</span>
 <span class="sd">        s3_bucket_name: S3 bucket name. Can also be provided by the ``DEFAULT_S3_BUCKET_NAME``</span>
 <span class="sd">            environment variable. One of the two must be specified. If both are specified this</span>
 <span class="sd">            argument has priority.</span>
 <span class="sd">        overwrite: Overwrite already existing files.</span>
-<span class="sd">        s3_kwargs: Additional kwargs to be passed to the S3 client function.</span>
+<span class="sd">        s3_kwargs: Additional kwargs to be passed to the S3 client function</span>
+<span class="sd">            :meth:`S3.Bucket.download_file`.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Local directory where files are stored.</span>
@@ -319,13 +323,17 @@
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Copy a directory from the local file system to a directory on S3.</span>
 
+<span class="sd">    TODO: add example</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        local_dir_name: Name of the local directory.</span>
 <span class="sd">        s3_dir_name: Name of the S3 directory.</span>
+<span class="sd">            This is the part after the ``s3_bucket_name``. Example: ``/foo/bar``</span>
 <span class="sd">        s3_bucket_name: S3 bucket name. Can also be provided by the ``DEFAULT_S3_BUCKET_NAME``</span>
 <span class="sd">            environment variable. One of the two must be specified. If both are specified this</span>
 <span class="sd">            argument has priority.</span>
-<span class="sd">        s3_kwargs: Additional kwargs to be passed to the S3 client function.</span>
+<span class="sd">        s3_kwargs: Additional kwargs to be passed to the S3 client function</span>
+<span class="sd">            :meth:`S3.Bucket.upload_file`.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        S3 directory where files are stored.</span>
@@ -357,7 +365,20 @@
     <span class="n">s3_bucket_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">s3_kwargs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;List files in S3 directory.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;List files in S3 directory.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        s3_dir_name: Name of the S3 directory.</span>
+<span class="sd">            This is the part after the ``s3_bucket_name``. Example: ``/foo/bar``</span>
+<span class="sd">        s3_bucket_name: S3 bucket name. Can also be provided by the ``DEFAULT_S3_BUCKET_NAME``</span>
+<span class="sd">            environment variable. One of the two must be specified. If both are specified this</span>
+<span class="sd">            argument has priority.</span>
+<span class="sd">        s3_kwargs: Additional kwargs to be passed to the S3 client function</span>
+<span class="sd">            :meth:`S3.Client.list_objects_v2`.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List of files in ``s3_dir_name``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">s3_kwargs</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="n">s3_kwargs</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">s3_kwargs</span>
     <span class="n">s3_bucket_name</span> <span class="o">=</span> <span class="n">_get_s3_bucket_name</span><span class="p">(</span><span class="n">s3_bucket_name</span><span class="p">)</span>
     <span class="n">s3_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">)</span>

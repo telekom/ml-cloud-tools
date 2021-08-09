@@ -180,15 +180,18 @@
 <dt class="sig sig-object py" id="ml_cloud_tools.s3.copy_dir_to_s3_dir">
 <span class="sig-prename descclassname"><span class="pre">ml_cloud_tools.s3.</span></span><span class="sig-name descname"><span class="pre">copy_dir_to_s3_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">local_dir_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3_dir_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3_bucket_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ml_cloud_tools/s3.html#copy_dir_to_s3_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ml_cloud_tools.s3.copy_dir_to_s3_dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy a directory from the local file system to a directory on S3.</p>
+<p>TODO: add example</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>local_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the local directory.</p></li>
-<li><p><strong>s3_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the S3 directory.</p></li>
+<li><p><strong>s3_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the S3 directory.
+This is the part after the <code class="docutils literal notranslate"><span class="pre">s3_bucket_name</span></code>. Example: <code class="docutils literal notranslate"><span class="pre">/foo/bar</span></code></p></li>
 <li><p><strong>s3_bucket_name</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – S3 bucket name. Can also be provided by the <code class="docutils literal notranslate"><span class="pre">DEFAULT_S3_BUCKET_NAME</span></code>
 environment variable. One of the two must be specified. If both are specified this
 argument has priority.</p></li>
-<li><p><strong>s3_kwargs</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>Any</em><em>]</em><em>]</em>) – Additional kwargs to be passed to the S3 client function.</p></li>
+<li><p><strong>s3_kwargs</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>Any</em><em>]</em><em>]</em>) – Additional kwargs to be passed to the S3 client function
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Bucket.upload_file" title="(in Boto3 Docs v1.18.16)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">S3.Bucket.upload_file()</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -205,7 +208,7 @@ argument has priority.</p></li>
 <span class="sig-prename descclassname"><span class="pre">ml_cloud_tools.s3.</span></span><span class="sig-name descname"><span class="pre">copy_file_to_s3_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">local_file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3_file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3_bucket_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ml_cloud_tools/s3.html#copy_file_to_s3_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ml_cloud_tools.s3.copy_file_to_s3_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy a file on the local file system to a file on S3.</p>
 <p>Upload a local file <code class="docutils literal notranslate"><span class="pre">local_file_name</span></code> to the S3 file at <code class="docutils literal notranslate"><span class="pre">s3_dir_name</span></code> from the
-S3 bucket <code class="docutils literal notranslate"><span class="pre">S3_BUCKET_NAME</span></code>.</p>
+S3 bucket <code class="docutils literal notranslate"><span class="pre">s3_bucket_name</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -216,7 +219,8 @@ This is the part after the <code class="docutils literal notranslate"><span clas
 <li><p><strong>s3_bucket_name</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – S3 bucket name. Can also be provided by the <code class="docutils literal notranslate"><span class="pre">DEFAULT_S3_BUCKET_NAME</span></code>
 environment variable. One of the two must be specified. If both are specified this
 argument has priority.</p></li>
-<li><p><strong>s3_kwargs</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>Any</em><em>]</em><em>]</em>) – Additional kwargs to be passed to the S3 client function.</p></li>
+<li><p><strong>s3_kwargs</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>Any</em><em>]</em><em>]</em>) – Additional kwargs to be passed to the S3 client function
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Bucket.upload_file" title="(in Boto3 Docs v1.18.16)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">S3.Bucket.upload_file()</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -235,13 +239,15 @@ This way a S3 file at <code class="docutils literal notranslate"><span class="pr
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>s3_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the S3 directory.</p></li>
+<li><p><strong>s3_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the S3 directory.
+This is the part after the <code class="docutils literal notranslate"><span class="pre">s3_bucket_name</span></code>. Example: <code class="docutils literal notranslate"><span class="pre">/foo/bar</span></code></p></li>
 <li><p><strong>local_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the local directory.</p></li>
 <li><p><strong>s3_bucket_name</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – S3 bucket name. Can also be provided by the <code class="docutils literal notranslate"><span class="pre">DEFAULT_S3_BUCKET_NAME</span></code>
 environment variable. One of the two must be specified. If both are specified this
 argument has priority.</p></li>
 <li><p><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Overwrite already existing files.</p></li>
-<li><p><strong>s3_kwargs</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>Any</em><em>]</em><em>]</em>) – Additional kwargs to be passed to the S3 client function.</p></li>
+<li><p><strong>s3_kwargs</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>Any</em><em>]</em><em>]</em>) – Additional kwargs to be passed to the S3 client function
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Bucket.download_file" title="(in Boto3 Docs v1.18.16)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">S3.Bucket.download_file()</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -258,7 +264,7 @@ In the example above, this would be <code class="docutils literal notranslate"><
 <dt class="sig sig-object py" id="ml_cloud_tools.s3.copy_s3_file_to_file">
 <span class="sig-prename descclassname"><span class="pre">ml_cloud_tools.s3.</span></span><span class="sig-name descname"><span class="pre">copy_s3_file_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s3_file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3_bucket_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ml_cloud_tools/s3.html#copy_s3_file_to_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ml_cloud_tools.s3.copy_s3_file_to_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy a file from S3 to a file on the local file system.</p>
-<p>Download the S3 file at <code class="docutils literal notranslate"><span class="pre">s3_dir_name</span></code> from the S3 bucket <code class="docutils literal notranslate"><span class="pre">S3_BUCKET_NAME</span></code>
+<p>Download the S3 file at <code class="docutils literal notranslate"><span class="pre">s3_dir_name</span></code> from the S3 bucket <code class="docutils literal notranslate"><span class="pre">s3_bucket_name</span></code>
 to the local file <code class="docutils literal notranslate"><span class="pre">local_file_name</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -271,7 +277,8 @@ Example: <code class="docutils literal notranslate"><span class="pre">/home/my_u
 environment variable. One of the two must be specified. If both are specified this
 argument has priority.</p></li>
 <li><p><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Overwrite local file.</p></li>
-<li><p><strong>s3_kwargs</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>Any</em><em>]</em><em>]</em>) – Additional kwargs to be passed to the S3 client function.</p></li>
+<li><p><strong>s3_kwargs</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>Any</em><em>]</em><em>]</em>) – Additional kwargs to be passed to the S3 client function
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Bucket.download_file" title="(in Boto3 Docs v1.18.16)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">S3.Bucket.download_file()</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -287,13 +294,20 @@ argument has priority.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>s3_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – </p></li>
-<li><p><strong>s3_bucket_name</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – </p></li>
-<li><p><strong>s3_kwargs</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>Any</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>s3_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Name of the S3 directory.
+This is the part after the <code class="docutils literal notranslate"><span class="pre">s3_bucket_name</span></code>. Example: <code class="docutils literal notranslate"><span class="pre">/foo/bar</span></code></p></li>
+<li><p><strong>s3_bucket_name</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – S3 bucket name. Can also be provided by the <code class="docutils literal notranslate"><span class="pre">DEFAULT_S3_BUCKET_NAME</span></code>
+environment variable. One of the two must be specified. If both are specified this
+argument has priority.</p></li>
+<li><p><strong>s3_kwargs</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>Any</em><em>]</em><em>]</em>) – Additional kwargs to be passed to the S3 client function
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Client.list_objects_v2" title="(in Boto3 Docs v1.18.16)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">S3.Client.list_objects_v2()</span></code></a>.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>]</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of files in <code class="docutils literal notranslate"><span class="pre">s3_dir_name</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>]</p>
 </dd>
 </dl>
 </dd></dl>
