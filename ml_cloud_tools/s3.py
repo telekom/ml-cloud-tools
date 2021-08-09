@@ -16,7 +16,7 @@ import boto3
 _logger = logging.getLogger(__name__)
 
 
-def _get_s3_bucket_name(s3_bucket_name) -> str:
+def _get_s3_bucket_name(s3_bucket_name: Optional[str] = None) -> str:
     if s3_bucket_name is None:
         s3_bucket_name = os.getenv("DEFAULT_S3_BUCKET_NAME")
     if s3_bucket_name is None:
