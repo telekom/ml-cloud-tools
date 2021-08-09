@@ -323,7 +323,10 @@
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Copy a directory from the local file system to a directory on S3.</span>
 
-<span class="sd">    TODO: add example</span>
+<span class="sd">    If you call this function with ``local_dir_name = &quot;a/x&quot;`` and ``s3_dir_name = &quot;y&quot;``</span>
+<span class="sd">    it will copy the content in ``a/x`` to the S3 location below ``y/x``.</span>
+<span class="sd">    This way the local file at ``a/x/file.txt`` would be copied to S3 at the</span>
+<span class="sd">    location ``y/x/tfile.txt``.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        local_dir_name: Name of the local directory.</span>
@@ -337,6 +340,7 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        S3 directory where files are stored.</span>
+<span class="sd">        In the example above, this would be ``y/x``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">s3_kwargs</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="n">s3_kwargs</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">s3_kwargs</span>
     <span class="n">local_dir_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">local_dir_name</span><span class="p">)</span>

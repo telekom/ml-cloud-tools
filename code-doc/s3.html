@@ -180,7 +180,10 @@
 <dt class="sig sig-object py" id="ml_cloud_tools.s3.copy_dir_to_s3_dir">
 <span class="sig-prename descclassname"><span class="pre">ml_cloud_tools.s3.</span></span><span class="sig-name descname"><span class="pre">copy_dir_to_s3_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">local_dir_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3_dir_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3_bucket_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s3_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ml_cloud_tools/s3.html#copy_dir_to_s3_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ml_cloud_tools.s3.copy_dir_to_s3_dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy a directory from the local file system to a directory on S3.</p>
-<p>TODO: add example</p>
+<p>If you call this function with <code class="docutils literal notranslate"><span class="pre">local_dir_name</span> <span class="pre">=</span> <span class="pre">&quot;a/x&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">s3_dir_name</span> <span class="pre">=</span> <span class="pre">&quot;y&quot;</span></code>
+it will copy the content in <code class="docutils literal notranslate"><span class="pre">a/x</span></code> to the S3 location below <code class="docutils literal notranslate"><span class="pre">y/x</span></code>.
+This way the local file at <code class="docutils literal notranslate"><span class="pre">a/x/file.txt</span></code> would be copied to S3 at the
+location <code class="docutils literal notranslate"><span class="pre">y/x/tfile.txt</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -195,7 +198,8 @@ argument has priority.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>S3 directory where files are stored.</p>
+<dd class="field-even"><p>S3 directory where files are stored.
+In the example above, this would be <code class="docutils literal notranslate"><span class="pre">y/x</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
