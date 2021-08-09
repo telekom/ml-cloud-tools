@@ -64,6 +64,7 @@ html_theme = "sphinx_rtd_theme"
 html_static_path = ["_static"]
 
 # -- additional settings -------------------------------------------------
+# The URL must point to a location where a "objects.inv" file is stored.
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
     "transformers": ("https://huggingface.co/transformers/", None),
@@ -72,6 +73,7 @@ intersphinx_mapping = {
     "scipy": ("https://docs.scipy.org/doc/scipy/reference/", None),
     "numpy": ("https://numpy.org/doc/stable/", None),
     "git": ("https://gitpython.readthedocs.io/en/stable/", None),
+    "boto3": ("https://boto3.amazonaws.com/v1/documentation/api/latest/", None),
 }
 
 html_logo = "imgs/1c-logo.png"

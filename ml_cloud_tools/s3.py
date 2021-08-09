@@ -46,7 +46,7 @@ def copy_s3_file_to_file(
 ) -> None:
     """Copy a file from S3 to a file on the local file system.
 
-    Download the S3 file at ``s3_dir_name`` from the S3 bucket ``S3_BUCKET_NAME``
+    Download the S3 file at ``s3_dir_name`` from the S3 bucket ``s3_bucket_name``
     to the local file ``local_file_name``.
 
     Args:
@@ -58,7 +58,8 @@ def copy_s3_file_to_file(
             environment variable. One of the two must be specified. If both are specified this
             argument has priority.
         overwrite: Overwrite local file.
-        s3_kwargs: Additional kwargs to be passed to the S3 client function.
+        s3_kwargs: Additional kwargs to be passed to the S3 client function
+            :meth:`S3.Bucket.download_file`.
     """
     s3_kwargs = {} if s3_kwargs is None else s3_kwargs
     if (not overwrite) and Path(local_file_name).is_file():
@@ -79,7 +80,7 @@ def copy_file_to_s3_file(
     """Copy a file on the local file system to a file on S3.
 
     Upload a local file ``local_file_name`` to the S3 file at ``s3_dir_name`` from the
-    S3 bucket ``S3_BUCKET_NAME``.
+    S3 bucket ``s3_bucket_name``.
 
     Args:
         local_file_name: Local path to the file to upload.
@@ -89,7 +90,8 @@ def copy_file_to_s3_file(
         s3_bucket_name: S3 bucket name. Can also be provided by the ``DEFAULT_S3_BUCKET_NAME``
             environment variable. One of the two must be specified. If both are specified this
             argument has priority.
-        s3_kwargs: Additional kwargs to be passed to the S3 client function.
+        s3_kwargs: Additional kwargs to be passed to the S3 client function
+            :meth:`S3.Bucket.upload_file`.
     """
     s3_kwargs = {} if s3_kwargs is None else s3_kwargs
     _logger.debug("Copying %s to S3 file %s", local_file_name, s3_file_name)
@@ -113,12 +115,14 @@ def copy_s3_dir_to_dir(
 
     Args:
         s3_dir_name: Name of the S3 directory.
+            This is the part after the ``s3_bucket_name``. Example: ``/foo/bar``
         local_dir_name: Name of the local directory.
         s3_bucket_name: S3 bucket name. Can also be provided by the ``DEFAULT_S3_BUCKET_NAME``
             environment variable. One of the two must be specified. If both are specified this
             argument has priority.
         overwrite: Overwrite already existing files.
-        s3_kwargs: Additional kwargs to be passed to the S3 client function.
+        s3_kwargs: Additional kwargs to be passed to the S3 client function
+            :meth:`S3.Bucket.download_file`.
 
     Returns:
         Local directory where files are stored.
@@ -154,16 +158,24 @@ def copy_dir_to_s3_dir(
 ) -> str:
     """Copy a directory from the local file system to a directory on S3.
 
+    If you call this function with ``local_dir_name = "a/x"`` and ``s3_dir_name = "y"``
+    it will copy the content in ``a/x`` to the S3 location below ``y/x``.
+    This way the local file at ``a/x/file.txt`` would be copied to S3 at the
+    location ``y/x/tfile.txt``.
+
     Args:
         local_dir_name: Name of the local directory.
         s3_dir_name: Name of the S3 directory.
+            This is the part after the ``s3_bucket_name``. Example: ``/foo/bar``
         s3_bucket_name: S3 bucket name. Can also be provided by the ``DEFAULT_S3_BUCKET_NAME``
             environment variable. One of the two must be specified. If both are specified this
             argument has priority.
-        s3_kwargs: Additional kwargs to be passed to the S3 client function.
+        s3_kwargs: Additional kwargs to be passed to the S3 client function
+            :meth:`S3.Bucket.upload_file`.
 
     Returns:
         S3 directory where files are stored.
+        In the example above, this would be ``y/x``.
     """
     s3_kwargs = {} if s3_kwargs is None else s3_kwargs
     local_dir_path = Path(local_dir_name)
@@ -192,7 +204,20 @@ def list_s3_files(
     s3_bucket_name: Optional[str] = None,
     s3_kwargs: Optional[Dict[str, Any]] = None,
 ) -> List[str]:
-    """List files in S3 directory."""
+    """List files in S3 directory.
+
+    Args:
+        s3_dir_name: Name of the S3 directory.
+            This is the part after the ``s3_bucket_name``. Example: ``/foo/bar``
+        s3_bucket_name: S3 bucket name. Can also be provided by the ``DEFAULT_S3_BUCKET_NAME``
+            environment variable. One of the two must be specified. If both are specified this
+            argument has priority.
+        s3_kwargs: Additional kwargs to be passed to the S3 client function
+            :meth:`S3.Client.list_objects_v2`.
+
+    Returns:
+        List of files in ``s3_dir_name``.
+    """
     s3_kwargs = {} if s3_kwargs is None else s3_kwargs
     s3_bucket_name = _get_s3_bucket_name(s3_bucket_name)
     s3_client = boto3.client("s3")
