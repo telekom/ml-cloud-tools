@@ -23,4 +23,4 @@ sphinx:
 	cd docs && $(MAKE) clean html && cd ..
 
 page:
-	firefox docs/build/html/index.html
+	xdg-open docs/build/html/index.html
