@@ -13,8 +13,8 @@ from ml_cloud_tools.s3 import (
 )
 
 
-# Versioning follows the `Semantic Versioning Specification <https://semver.org/>`__ and
-# `PEP 440 -- Version Identification and Dependency Specification <https://www.python.org/dev/peps/pep-0440/>`__.  # noqa: E501
+# Versioning follows the Semantic Versioning Specification https://semver.org/ and
+# PEP 440 -- Version Identification and Dependency Specification: https://www.python.org/dev/peps/pep-0440/  # noqa: E501
 __version__ = "0.0.1rc5"
 
 __all__ = [
