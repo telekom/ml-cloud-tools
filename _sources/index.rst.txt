@@ -1,6 +1,18 @@
 ML-Cloud-Tools
 ==============
 
+☁️ Machine Learning Tools for the Cloud. Currently very much focused on AWS and S3. ☁️
+
+Installation
+------------
+
+ML-Cloud-Tools is available at the `Python Package Index (PyPI) <https://pypi.org/project/ml-cloud-tools/>`__.
+It can be installed with pip:
+
+.. code-block:: bash
+
+   pip install ml-cloud-tools
+
 Content
 -------
 
@@ -8,16 +20,8 @@ Content
    :glob:
    :maxdepth: 2
 
-   code-doc
-   License <https://github.com/telekom/ml-cloud-tools/blob/main/LICENSE>
-   Contributing <https://github.com/telekom/ml-cloud-tools/blob/main/CONTRIBUTING.md>
-   Contributor Covenant Code of Conduct <https://github.com/telekom/ml-cloud-tools/blob/main/CODE_OF_CONDUCT.md>
+   api-reference
+   genindex
    GitHub Repository <https://github.com/telekom/ml-cloud-tools>
+   License <https://github.com/telekom/ml-cloud-tools/blob/main/LICENSE>
    Imprint <https://www.telekom.com/imprint>
-
-Indices and Tables
-------------------
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
