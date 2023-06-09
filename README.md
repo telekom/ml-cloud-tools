@@ -2,20 +2,12 @@
 
 ## Table of Contents
 
-- [Maintainers](#maintainers)
 - [Installation](#installation)
 - [Support and Feedback](#support-and-feedback)
 - [Reporting Security Vulnerabilities](#reporting-security-vulnerabilities)
 - [Contribution](#contribution)
 - [Code of Conduct](#code-of-conduct)
 - [Licensing](#licensing)
-
-## Maintainers
-
-[![One Conversation](https://raw.githubusercontent.com/telekom/ml-cloud-tools/main/docs/source/imgs/1c-logo.png)](https://www.welove.ai/)
-<br/>
-This project is maintained by the [One Conversation](https://www.welove.ai/)
-team of [Deutsche Telekom AG](https://www.telekom.com/).
 
 ## Installation
 
