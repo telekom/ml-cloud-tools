@@ -1,21 +1,15 @@
 # ML-Cloud-Tools - [Code Doc](https://telekom.github.io/ml-cloud-tools/)
 
+☁️ Machine Learning Tools for the Cloud. Currently very much focused on AWS and S3. ☁️
+
 ## Table of Contents
 
-- [Maintainers](#maintainers)
 - [Installation](#installation)
 - [Support and Feedback](#support-and-feedback)
 - [Reporting Security Vulnerabilities](#reporting-security-vulnerabilities)
 - [Contribution](#contribution)
 - [Code of Conduct](#code-of-conduct)
 - [Licensing](#licensing)
-
-## Maintainers
-
-[![One Conversation](https://raw.githubusercontent.com/telekom/ml-cloud-tools/main/docs/source/imgs/1c-logo.png)](https://www.welove.ai/)
-<br/>
-This project is maintained by the [One Conversation](https://www.welove.ai/)
-team of [Deutsche Telekom AG](https://www.telekom.com/).
 
 ## Installation
 
@@ -65,8 +59,8 @@ All contributors must abide by the code of conduct.
 ## Licensing
 
 Copyright (c) 2021 Timothy Wolff-Piggott, Deutsche Telekom AG<br/>
-Copyright (c) 2021 Philip May, Deutsche Telekom AG<br/>
-Copyright (c) 2021 Philip May
+Copyright (c) 2021-2023 Philip May, Deutsche Telekom AG<br/>
+Copyright (c) 2021-2023 Philip May
 
 Licensed under the **MIT License** (the "License"); you may not use this file except in compliance with the License.
 You may obtain a copy of the License by reviewing the file
