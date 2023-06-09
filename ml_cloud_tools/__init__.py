@@ -15,7 +15,7 @@ from ml_cloud_tools.s3 import (
 
 # Versioning follows the Semantic Versioning Specification https://semver.org/ and
 # PEP 440 -- Version Identification and Dependency Specification: https://www.python.org/dev/peps/pep-0440/  # noqa: E501
-__version__ = "0.0.1rc5"
+__version__ = "0.0.1"
 
 __all__ = [
     "copy_dir_to_s3_dir",
