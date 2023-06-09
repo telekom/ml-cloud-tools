@@ -67,7 +67,7 @@ html_static_path = ["_static"]
 # The URL must point to a location where a "objects.inv" file is stored.
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
-    "transformers": ("https://huggingface.co/transformers/", None),
+    # "transformers": ("https://huggingface.co/transformers/", None),
     "optuna": ("https://optuna.readthedocs.io/en/stable/", None),
     "mlflow": ("https://www.mlflow.org/docs/latest/", None),
     "scipy": ("https://docs.scipy.org/doc/scipy/reference/", None),
