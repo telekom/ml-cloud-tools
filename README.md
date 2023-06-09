@@ -1,5 +1,7 @@
 # ML-Cloud-Tools - [Code Doc](https://telekom.github.io/ml-cloud-tools/)
 
+☁️ Machine Learning Tools for the Cloud. Currently very much focused on AWS and S3. ☁️
+
 ## Table of Contents
 
 - [Installation](#installation)
