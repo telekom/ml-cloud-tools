@@ -21,7 +21,7 @@ from typing import List
 # -- Project information -----------------------------------------------------
 
 project = "ML-Cloud-Tools"
-copyright = "2021, Philip May, Deutsche Telekom AG"
+copyright = "2021-2023, Philip May, Deutsche Telekom AG"
 author = "Philip May"
 
 
