@@ -1,5 +1,14 @@
 # ML-Cloud-Tools - [Code Doc](https://telekom.github.io/ml-cloud-tools/)
 
+[![MIT License](https://img.shields.io/github/license/telekom/ml-cloud-tools)](https://github.com/telekom/ml-cloud-tools/blob/main/LICENSE)
+[![Python Version](https://img.shields.io/pypi/pyversions/ml-cloud-tools)](https://www.python.org)
+[![pypi](https://img.shields.io/pypi/v/ml-cloud-tools.svg)](https://pypi.python.org/pypi/ml-cloud-tools)
+<br/>
+[![pytest](https://github.com/telekom/ml-cloud-tools/actions/workflows/pytest.yml/badge.svg)](https://github.com/telekom/ml-cloud-tools/actions/workflows/pytest.yml)
+[![Static Code Checks](https://github.com/telekom/ml-cloud-tools/actions/workflows/static_checks.yml/badge.svg)](https://github.com/telekom/ml-cloud-tools/actions/workflows/static_checks.yml)
+[![Build & Deploy Doc](https://github.com/telekom/ml-cloud-tools/actions/workflows/build_deploy_doc.yml/badge.svg)](https://github.com/telekom/ml-cloud-tools/actions/workflows/build_deploy_doc.yml)
+[![GitHub issues](https://img.shields.io/github/issues-raw/telekom/ml-cloud-tools)](https://github.com/telekom/ml-cloud-tools/issues)
+
 ☁️ Machine Learning Tools for the Cloud. Currently very much focused on AWS and S3. ☁️
 
 ## Table of Contents
