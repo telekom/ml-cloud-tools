@@ -57,8 +57,8 @@ All contributors must abide by the code of conduct.
 ## Licensing
 
 Copyright (c) 2021 Timothy Wolff-Piggott, Deutsche Telekom AG<br/>
-Copyright (c) 2021 Philip May, Deutsche Telekom AG<br/>
-Copyright (c) 2021 Philip May
+Copyright (c) 2021-2023 Philip May, Deutsche Telekom AG<br/>
+Copyright (c) 2021-2023 Philip May
 
 Licensed under the **MIT License** (the "License"); you may not use this file except in compliance with the License.
 You may obtain a copy of the License by reviewing the file
