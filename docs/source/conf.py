@@ -76,7 +76,7 @@ intersphinx_mapping = {
     "boto3": ("https://boto3.amazonaws.com/v1/documentation/api/latest/", None),
 }
 
-html_logo = "imgs/1c-logo.png"
+# html_logo = "imgs/xxx.png"
 
 # These paths are either relative to html_static_path
 # or fully qualified paths (eg. https://...)
