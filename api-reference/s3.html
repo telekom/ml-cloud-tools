@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>s3 &mdash; ML-Cloud-Tools  documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -103,14 +105,14 @@ location <code class="docutils literal notranslate"><span class="pre">y/x/tfile.
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>local_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of the local directory.</p></li>
-<li><p><strong>s3_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of the S3 directory.
+<li><p><strong>local_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of the local directory.</p></li>
+<li><p><strong>s3_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of the S3 directory.
 This is the part after the <code class="docutils literal notranslate"><span class="pre">s3_bucket_name</span></code>. Example: <code class="docutils literal notranslate"><span class="pre">/foo/bar</span></code></p></li>
-<li><p><strong>s3_bucket_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><em>Optional</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – S3 bucket name. Can also be provided by the <code class="docutils literal notranslate"><span class="pre">DEFAULT_S3_BUCKET_NAME</span></code>
+<li><p><strong>s3_bucket_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><em>Optional</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – S3 bucket name. Can also be provided by the <code class="docutils literal notranslate"><span class="pre">DEFAULT_S3_BUCKET_NAME</span></code>
 environment variable. One of the two must be specified. If both are specified this
 argument has priority.</p></li>
-<li><p><strong>s3_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><em>Optional</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.11)"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><em>Any</em></a><em>]</em><em>]</em>) – Additional kwargs to be passed to the S3 client function
-<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3/bucket/upload_file.html#S3.Bucket.upload_file" title="(in Boto3 v1.26.150)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">S3.Bucket.upload_file()</span></code></a>.</p></li>
+<li><p><strong>s3_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><em>Optional</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.12)"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><em>Any</em></a><em>]</em><em>]</em>) – Additional kwargs to be passed to the S3 client function
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3/bucket/upload_file.html#S3.Bucket.upload_file" title="(in Boto3 v1.33.11)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">S3.Bucket.upload_file()</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -118,7 +120,7 @@ argument has priority.</p></li>
 In the example above, this would be <code class="docutils literal notranslate"><span class="pre">y/x</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -132,15 +134,15 @@ S3 bucket <code class="docutils literal notranslate"><span class="pre">s3_bucket
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>local_file_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Local path to the file to upload.
+<li><p><strong>local_file_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Local path to the file to upload.
 Example: <code class="docutils literal notranslate"><span class="pre">/home/my_username/baz.txt</span></code></p></li>
-<li><p><strong>s3_file_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of the so called key to upload to.
+<li><p><strong>s3_file_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of the so called key to upload to.
 This is the part after the <code class="docutils literal notranslate"><span class="pre">s3_bucket_name</span></code>. Example: <code class="docutils literal notranslate"><span class="pre">/foo/bar/baz.txt</span></code></p></li>
-<li><p><strong>s3_bucket_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><em>Optional</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – S3 bucket name. Can also be provided by the <code class="docutils literal notranslate"><span class="pre">DEFAULT_S3_BUCKET_NAME</span></code>
+<li><p><strong>s3_bucket_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><em>Optional</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – S3 bucket name. Can also be provided by the <code class="docutils literal notranslate"><span class="pre">DEFAULT_S3_BUCKET_NAME</span></code>
 environment variable. One of the two must be specified. If both are specified this
 argument has priority.</p></li>
-<li><p><strong>s3_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><em>Optional</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.11)"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><em>Any</em></a><em>]</em><em>]</em>) – Additional kwargs to be passed to the S3 client function
-<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3/bucket/upload_file.html#S3.Bucket.upload_file" title="(in Boto3 v1.26.150)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">S3.Bucket.upload_file()</span></code></a>.</p></li>
+<li><p><strong>s3_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><em>Optional</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.12)"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><em>Any</em></a><em>]</em><em>]</em>) – Additional kwargs to be passed to the S3 client function
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3/bucket/upload_file.html#S3.Bucket.upload_file" title="(in Boto3 v1.33.11)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">S3.Bucket.upload_file()</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -159,15 +161,15 @@ This way a S3 file at <code class="docutils literal notranslate"><span class="pr
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>s3_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of the S3 directory.
+<li><p><strong>s3_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of the S3 directory.
 This is the part after the <code class="docutils literal notranslate"><span class="pre">s3_bucket_name</span></code>. Example: <code class="docutils literal notranslate"><span class="pre">/foo/bar</span></code></p></li>
-<li><p><strong>local_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of the local directory.</p></li>
-<li><p><strong>s3_bucket_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><em>Optional</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – S3 bucket name. Can also be provided by the <code class="docutils literal notranslate"><span class="pre">DEFAULT_S3_BUCKET_NAME</span></code>
+<li><p><strong>local_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of the local directory.</p></li>
+<li><p><strong>s3_bucket_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><em>Optional</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – S3 bucket name. Can also be provided by the <code class="docutils literal notranslate"><span class="pre">DEFAULT_S3_BUCKET_NAME</span></code>
 environment variable. One of the two must be specified. If both are specified this
 argument has priority.</p></li>
-<li><p><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – Overwrite already existing files.</p></li>
-<li><p><strong>s3_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><em>Optional</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.11)"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><em>Any</em></a><em>]</em><em>]</em>) – Additional kwargs to be passed to the S3 client function
-<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3/bucket/download_file.html#S3.Bucket.download_file" title="(in Boto3 v1.26.150)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">S3.Bucket.download_file()</span></code></a>.</p></li>
+<li><p><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Overwrite already existing files.</p></li>
+<li><p><strong>s3_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><em>Optional</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.12)"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><em>Any</em></a><em>]</em><em>]</em>) – Additional kwargs to be passed to the S3 client function
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3/bucket/download_file.html#S3.Bucket.download_file" title="(in Boto3 v1.33.11)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">S3.Bucket.download_file()</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -175,7 +177,7 @@ argument has priority.</p></li>
 In the example above, this would be <code class="docutils literal notranslate"><span class="pre">y/x</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -189,16 +191,16 @@ to the local file <code class="docutils literal notranslate"><span class="pre">l
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>s3_file_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of the so called key to download from.
+<li><p><strong>s3_file_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of the so called key to download from.
 This is the part after the <code class="docutils literal notranslate"><span class="pre">s3_bucket_name</span></code>. Example: <code class="docutils literal notranslate"><span class="pre">/foo/bar/baz.txt</span></code></p></li>
-<li><p><strong>local_file_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Local path to the file to download to.
+<li><p><strong>local_file_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Local path to the file to download to.
 Example: <code class="docutils literal notranslate"><span class="pre">/home/my_username/baz.txt</span></code></p></li>
-<li><p><strong>s3_bucket_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><em>Optional</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – S3 bucket name. Can also be provided by the <code class="docutils literal notranslate"><span class="pre">DEFAULT_S3_BUCKET_NAME</span></code>
+<li><p><strong>s3_bucket_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><em>Optional</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – S3 bucket name. Can also be provided by the <code class="docutils literal notranslate"><span class="pre">DEFAULT_S3_BUCKET_NAME</span></code>
 environment variable. One of the two must be specified. If both are specified this
 argument has priority.</p></li>
-<li><p><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – Overwrite local file.</p></li>
-<li><p><strong>s3_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><em>Optional</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.11)"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><em>Any</em></a><em>]</em><em>]</em>) – Additional kwargs to be passed to the S3 client function
-<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3/bucket/download_file.html#S3.Bucket.download_file" title="(in Boto3 v1.26.150)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">S3.Bucket.download_file()</span></code></a>.</p></li>
+<li><p><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Overwrite local file.</p></li>
+<li><p><strong>s3_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><em>Optional</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.12)"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><em>Any</em></a><em>]</em><em>]</em>) – Additional kwargs to be passed to the S3 client function
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3/bucket/download_file.html#S3.Bucket.download_file" title="(in Boto3 v1.33.11)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">S3.Bucket.download_file()</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -214,20 +216,20 @@ argument has priority.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>s3_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of the S3 directory.
+<li><p><strong>s3_dir_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of the S3 directory.
 This is the part after the <code class="docutils literal notranslate"><span class="pre">s3_bucket_name</span></code>. Example: <code class="docutils literal notranslate"><span class="pre">/foo/bar</span></code></p></li>
-<li><p><strong>s3_bucket_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><em>Optional</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – S3 bucket name. Can also be provided by the <code class="docutils literal notranslate"><span class="pre">DEFAULT_S3_BUCKET_NAME</span></code>
+<li><p><strong>s3_bucket_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><em>Optional</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – S3 bucket name. Can also be provided by the <code class="docutils literal notranslate"><span class="pre">DEFAULT_S3_BUCKET_NAME</span></code>
 environment variable. One of the two must be specified. If both are specified this
 argument has priority.</p></li>
-<li><p><strong>s3_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><em>Optional</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.11)"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><em>Any</em></a><em>]</em><em>]</em>) – Additional kwargs to be passed to the S3 client function
-<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3/client/list_objects_v2.html#S3.Client.list_objects_v2" title="(in Boto3 v1.26.150)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">S3.Client.list_objects_v2()</span></code></a>.</p></li>
+<li><p><strong>s3_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><em>Optional</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.12)"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><em>Any</em></a><em>]</em><em>]</em>) – Additional kwargs to be passed to the S3 client function
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3/client/list_objects_v2.html#S3.Client.list_objects_v2" title="(in Boto3 v1.33.11)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">S3.Client.list_objects_v2()</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>List of files in <code class="docutils literal notranslate"><span class="pre">s3_dir_name</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><em>List</em></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><em>List</em></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>]</p>
 </dd>
 </dl>
 </dd></dl>
