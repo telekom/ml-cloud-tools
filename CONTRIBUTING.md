@@ -33,7 +33,7 @@ the project itself will be closed by our community managers.
 
 ## Engaging in our Project
 
-- If you have a trivial fix or improvement, plese go ahead and create a pull request.
+- If you have a trivial fix or improvement, please go ahead and create a pull request.
 - A general guide to pull requests is here:
   [About pull requests](https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
 - If you want you can address (with `@...`) a suitable [code owner](#code-owners) of this
